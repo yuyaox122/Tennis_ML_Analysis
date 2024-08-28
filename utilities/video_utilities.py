@@ -4,7 +4,7 @@ def read_video(video_path):
     cap = cv2.VideoCapture(video_path)
     frames = []
     # Read until video is completed
-    while cap.isOpened():
+    while True:
         # Return the frame and the flag ret
         ret, frame = cap.read()
         if not ret:
