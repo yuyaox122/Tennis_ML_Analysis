@@ -23,6 +23,7 @@ def main():
     court_model_path = "C:/Users/yuyao/OneDrive/Documents/EPQ/models/court_points_model.pth"
     court_line_detector = CourtLineDetector(court_model_path)
     court_keypoints = court_line_detector.predict(video_frames[0])
+    player_detections = player_tracker.filter_players(court_keypoints, player_detections)
     ball_detections = ball_tracker.interpolate_ball_positions(ball_detections)
     # Draw bounding boxes around the players and balls
     output_video_frames = player_tracker.draw_bboxes(video_frames, player_detections)

@@ -3,14 +3,39 @@ import cv2
 import pickle
 import sys
 sys.path.append('../')
-from utils import measure_distance, get_centre_of_bbox
+from utilities import measure_distance, get_centre_of_bbox
 
 class PlayerTracker:
     def __init__(self, model_path):
         self.model = YOLO(model_path)
 
     def filter_players(self, court_keypoints, player_detections):
-    def choose_player(self):
+        # Choose the players that are on the court from the first frame
+        chosen_players = self.choose_players(court_keypoints, player_detections[0])
+        filtered_player_detections = []
+        
+        for player_dict in player_detections:
+            filtered_player_dict = {trackid: bbox for trackid, bbox in player_dict.items() if trackid in chosen_players}
+            filtered_player_detections.append(filtered_player_dict)
+        return filtered_player_detections
+
+    def choose_players(self, court_keypoints, player_dict):
+        distances = []
+        # Loop through the players in the player dictionary
+        for track_id, bbox in player_dict.items():
+            player_centre = get_centre_of_bbox(bbox)
+            min_distance = float('inf')
+            for i in range(0 , len(court_keypoints), 2):
+                # Loop through the x and y coordinates of the court keypoints
+                court_keypoint = (court_keypoints[i], court_keypoints[i+1])
+                distance = measure_distance(player_centre, court_keypoint)
+                if distance < min_distance:
+                    min_distance = distance
+            # For each player, store the track id and the minimum distance to the court keypoints
+            distances.append((track_id, min_distance))
+            distances.sort(key=lambda x: x[1])
+            # Choose the two players with the smallest distances to the court keypoints
+            chosen_players = [distances[0][0], distances[1][0]]
 
     def detect_frames(self, frames, read_from_stub=False, stub_path=None):
         player_detections = []
