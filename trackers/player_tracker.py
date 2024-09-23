@@ -33,9 +33,10 @@ class PlayerTracker:
                     min_distance = distance
             # For each player, store the track id and the minimum distance to the court keypoints
             distances.append((track_id, min_distance))
-            distances.sort(key=lambda x: x[1])
-            # Choose the two players with the smallest distances to the court keypoints
-            chosen_players = [distances[0][0], distances[1][0]]
+        distances.sort(key=lambda x: x[1])
+        # Choose the two players with the smallest distances to the court keypoints
+        chosen_players = [distances[0][0], distances[1][0]]
+        return chosen_players
 
     def detect_frames(self, frames, read_from_stub=False, stub_path=None):
         player_detections = []
