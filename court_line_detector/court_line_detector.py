@@ -33,9 +33,11 @@ class CourtLineDetector:
         # Get the original image dimensions
         original_h, original_w = image.shape[:2]
         # Scale the keypoints to the original image dimensions
+        print(keypoints[::2])
+        print(keypoints[1::2])
         keypoints[::2] *= original_w / 224.0
         keypoints[1::2] *= original_h / 224.0
-
+        
         return keypoints
 
     def draw_keypoints(self, image, keypoints):
@@ -60,3 +62,4 @@ class CourtLineDetector:
             # Append the frame with keypoints to the output list
             output_video_frames.append(frame)
         return output_video_frames
+
