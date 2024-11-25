@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="24.9.0">
+  <diagram name="Page-1" id="J5MlUpFbuROrRSM-w5gt">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Project" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="8" y="8" width="1483" height="885" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Testing" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="2">
+          <mxGeometry x="43" y="540" width="334" height="316" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="Unit Testing" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="3">
+          <mxGeometry x="102" y="43" width="145" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Integration Testing" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="3">
+          <mxGeometry x="78" y="142" width="194" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="User Acceptance Testing" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="3">
+          <mxGeometry x="58" y="240" width="234" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="Analysis" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="441" y="46" width="117" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="Design" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="446" y="169" width="106" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="Development" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="422" y="293" width="155" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="Testing" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="444" y="416" width="110" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="Deployment" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
+          <mxGeometry x="427" y="673" width="146" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="Development" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="2">
+          <mxGeometry x="622" y="540" width="225" height="316" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="Frontend" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="12">
+          <mxGeometry x="58" y="43" width="125" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="Backend" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="12">
+          <mxGeometry x="61" y="142" width="120" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="Database" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="12">
+          <mxGeometry x="58" y="240" width="125" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="Design" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="2">
+          <mxGeometry x="898" y="589" width="250" height="217" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="Architecture" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="16">
+          <mxGeometry x="58" y="43" width="150" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="18" value="UI/UX" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="16">
+          <mxGeometry x="82" y="142" width="103" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="19" value="Analysis" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="2">
+          <mxGeometry x="1198" y="580" width="258" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="20" value="Research" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="19">
+          <mxGeometry x="75" y="43" width="124" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="Requirements&#xa;Analysis" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="19">
+          <mxGeometry x="58" y="142" width="158" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="22" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" edge="1" parent="2" source="7" target="8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;" edge="1" parent="2" source="8" target="9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="24" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" edge="1" parent="2" source="9" target="10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=0;" edge="1" parent="2" source="10" target="11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
