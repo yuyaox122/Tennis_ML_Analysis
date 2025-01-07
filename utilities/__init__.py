@@ -1,3 +1,4 @@
 from .video_utilities import read_video, save_video
 from .bbox_utilities import get_centre_of_bbox, measure_distance, get_foot_position, get_closest_keypoint_index, get_height_of_bbox, measure_xy_distance
 from .conversion_utilities import convert_meters_to_pixel_distance, convert_pixel_distance_to_meters
+from .stats_drawer_utilities import draw_player_stats

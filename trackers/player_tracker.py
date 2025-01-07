@@ -25,7 +25,7 @@ class PlayerTracker:
         for track_id, bbox in player_dict.items():
             player_centre = get_centre_of_bbox(bbox)
             min_distance = float('inf')
-            for i in range(0 , len(court_keypoints), 2):
+            for i in range(0, len(court_keypoints), 2):
                 # Loop through the x and y coordinates of the court keypoints
                 court_keypoint = (court_keypoints[i], court_keypoints[i+1])
                 distance = measure_distance(player_centre, court_keypoint)
@@ -51,7 +51,6 @@ class PlayerTracker:
             player_dict = self.detect_frame(frame)
             player_detections.append(player_dict)
         
-    
         # Save the player detections to a stub file
         if stub_path is not None:
             with open(stub_path, "wb") as f:
@@ -83,7 +82,7 @@ class PlayerTracker:
             for track_id, bbox in player_dict.items():
                 x1, y1, x2, y2 = bbox
                 # Draw the bounding box on the frame
-                cv2.putText(frame, f"Player ID: {track_id}",(int(bbox[0]),int(bbox[1] -10 )),cv2.FONT_HERSHEY_COMPLEX, 0.9, (0, 0, 255), 2)
+                cv2.putText(frame, f"Player ID: {track_id}", (int(bbox[0]), int(bbox[1] - 10)), cv2.FONT_HERSHEY_COMPLEX, 0.9, (0, 0, 255), 2)
                 cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)
             output_video_frames.append(frame)
         return output_video_frames
