@@ -33,6 +33,7 @@ class CourtLineDetector:
         # Get the original image dimensions
         original_h, original_w = image.shape[:2]
         # Scale the keypoints to the original image dimensions
+        print(keypoints)
         print(keypoints[::2])
         print(keypoints[1::2])
         keypoints[::2] *= original_w / 224.0
@@ -44,10 +45,10 @@ class CourtLineDetector:
     # Plot keypoints on the image
         for i in range(0, len(keypoints), 2):
             # Get the x and y coordinates of the keypoint
-            x = int(keypoints[i])
+            x = int(keypoints[i]) + 10
             y = int(keypoints[i+1])
             # Draw the keypoint index near the keypoint
-            cv2.putText(image, str(i//2), (x, y-10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
+            cv2.putText(image, str(i//2), (x, y - 10), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
             # Draw a circle at the keypoint location
             cv2.circle(image, (x, y), 5, (0, 0, 255), -1)
         return image
