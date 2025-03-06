@@ -15,12 +15,16 @@ import cv2
 import pandas as pd
 import os
 
-def main():
-    input_video_path = "tennis_analysis/input_videos/short_clip.mp4"
+def check_loaded():
+    return loaded
+
+def main(input_video_path):
+    global loaded
+    loaded = False
+    # input_video_path = "tennis_analysis/input_videos/short_clip.mp4"
     # Read the video frames
     video_frames = read_video(input_video_path)
-
-    print(os.listdir("models"))
+    
     # Initialize the player tracker and ball tracker
     player_tracker = PlayerTracker(model_path="models/yolov8x.pt")
     ball_tracker = BallTracker(model_path="models/yolov5_last.pt")
@@ -146,6 +150,9 @@ def main():
     for i, frame in enumerate(output_video_frames):
         cv2.putText(frame, f"Frame: {i}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     save_video(output_video_frames, "tennis_analysis/output_videos/output_video.avi")
+
+    print("Finished Processing")
+    loaded = True
 
 if __name__ == "__main__":
     main()

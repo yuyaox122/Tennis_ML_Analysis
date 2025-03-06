@@ -1,87 +1,99 @@
-import datetime
-import tkinter as tk
-from tkinter import filedialog
-from tkVideoPlayer import TkinterVideo
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.video import Video
+from kivy.uix.button import Button
+from kivy.uix.slider import Slider
+from kivy.uix.filechooser import FileChooserIconView
+from kivy.uix.popup import Popup
+from kivy.clock import Clock
+from kivy.uix.label import Label
+import os
 
+class VideoPlayerApp(App):
+    def build(self):
+        # Main layout
+        layout = BoxLayout(orientation='vertical')
 
-def update_duration(event):
-    duration = vid_player.video_info()["duration"]
-    end_time["text"] = str(datetime.timedelta(seconds=duration))
-    progress_slider["to"] = duration
+        # Video player widget
+        self.video = Video(source="long_clip.mp4", state='stop', options={'eos': 'loop'})
+        layout.add_widget(self.video)
 
+        # Controls layout (horizontal)
+        controls = BoxLayout(size_hint_y=0.2)
 
-def update_scale(event):
-    progress_value.set(vid_player.current_duration())
+        # Play button
+        play_button = Button(text="Play", on_press=self.play_video)
+        controls.add_widget(play_button)
 
+        # Pause button
+        pause_button = Button(text="Pause", on_press=self.pause_video)
+        controls.add_widget(pause_button)
 
-def load_video():
-    file_path = filedialog.askopenfilename()
+        # Stop button
+        stop_button = Button(text="Stop", on_press=self.stop_video)
+        controls.add_widget(stop_button)
 
-    if file_path:
-        vid_player.load(file_path)
+        # File select button
+        file_button = Button(text="Select File", on_press=self.open_filechooser)
+        controls.add_widget(file_button)
 
-        progress_slider.config(to=0, from_=0)
-        play_pause_btn["text"] = "Play"
-        progress_value.set(0)
+        # Seek slider
+        self.slider = Slider(min=0, max=100, value=0)
+        self.slider.bind(on_touch_up=self.seek_video)
+        controls.add_widget(self.slider)
 
+        layout.add_widget(controls)
 
-def seek(value):
-    vid_player.seek(int(value))
+        # Update slider position periodically
+        Clock.schedule_interval(self.update_slider, 0.5)
 
+        return layout
 
-def skip(value: int):
-    vid_player.seek(int(progress_slider.get())+value)
-    progress_value.set(progress_slider.get() + value)
+    def play_video(self, instance):
+        # Play the video
+        if self.video.state != 'play':
+            self.video.state = 'play'
 
+    def pause_video(self, instance):
+        # Pause the video
+        if self.video.state == 'play':
+            self.video.state = 'pause'
 
-def play_pause():
-    if vid_player.is_paused():
-        vid_player.play()
-        play_pause_btn["text"] = "Pause"
+    def stop_video(self, instance):
+        # Stop the video and reset to the beginning
+        self.video.state = 'stop'
+        self.video.seek(0)
+        self.slider.value = 0
 
-    else:
-        vid_player.pause()
-        play_pause_btn["text"] = "Play"
+    def update_slider(self, dt):
+        # Update the slider based on video progress
+        if self.video.duration and self.video.state == 'play':
+            self.slider.max = self.video.duration
+            self.slider.value = self.video.position
 
+    def seek_video(self, instance, touch):
+        # Seek the video when the slider is moved
+        if instance.collide_point(*touch.pos):
+            self.video.seek(instance.value)
 
-def video_ended(event):
-    progress_slider.set(progress_slider["to"])
-    play_pause_btn["text"] = "Play"
-    progress_slider.set(0)
+    def open_filechooser(self, instance):
+        # Open file chooser dialog
+        content = FileChooserIconView()
+        content.bind(on_selection=lambda widget, selection: self.selected(selection))
 
+        self.popup = Popup(title="Select a Video File", content=content, size_hint=(0.9, 0.9))
+        self.popup.open()
 
-root = tk.Tk()
-root.title("Tkinter media")
+    def selected(self, selection):
+        # Callback for file selection
+        if selection:
+            video_file = selection[0]
+            self.video.source = video_file
+            self.video.state = 'stop'
+            self.video.seek(0)
+            self.slider.value = 0
+            self.popup.dismiss()
+            print(f"Selected file: {video_file}")
 
-load_btn = tk.Button(root, text="Load", command=load_video)
-load_btn.pack()
-
-vid_player = TkinterVideo(scaled=True, master=root)
-vid_player.pack(expand=True, fill="both")
-
-play_pause_btn = tk.Button(root, text="Play", command=play_pause)
-play_pause_btn.pack()
-
-skip_plus_5sec = tk.Button(root, text="Skip -5 sec", command=lambda: skip(-5))
-skip_plus_5sec.pack(side="left")
-
-start_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
-start_time.pack(side="left")
-
-progress_value = tk.IntVar(root)
-
-progress_slider = tk.Scale(root, variable=progress_value, from_=0, to=0, orient="horizontal", command=seek)
-# progress_slider.bind("<ButtonRelease-1>", seek)
-progress_slider.pack(side="left", fill="x", expand=True)
-
-end_time = tk.Label(root, text=str(datetime.timedelta(seconds=0)))
-end_time.pack(side="left")
-
-vid_player.bind("<<Duration>>", update_duration)
-vid_player.bind("<<SecondChanged>>", update_scale)
-vid_player.bind("<<Ended>>", video_ended )
-
-skip_plus_5sec = tk.Button(root, text="Skip +5 sec", command=lambda: skip(5))
-skip_plus_5sec.pack(side="left")
-
-root.mainloop()
+if __name__ == "__main__":
+    VideoPlayerApp().run()

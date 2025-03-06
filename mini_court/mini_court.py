@@ -16,11 +16,11 @@ from utilities import (
 
 class MiniCourt():
     def __init__(self, frame):
-        self.drawing_rectangle_width = 250
-        self.drawing_rectangle_height = 500
+        self.drawing_rectangle_width = 200
+        self.drawing_rectangle_height = 400
         # Buffer between the court and the frame edges
-        self.buffer = 50
-        self.padding_court=20
+        self.buffer = 30
+        self.padding_court = 20
 
         # Set the position of the background rectangle
         self.set_court_background_position(frame)
@@ -202,7 +202,7 @@ class MiniCourt():
             ball_position = get_centre_of_bbox(ball_box)
             # Get the closest player to the ball
             closest_player_id_to_ball = min(player_bbox.keys(), key=lambda x: measure_distance(ball_position, get_centre_of_bbox(player_bbox[x])))
-
+ 
             output_player_bboxes_dict = {}
             for player_id, bbox in player_bbox.items():
                 foot_position = get_foot_position(bbox)
