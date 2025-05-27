@@ -63,3 +63,4 @@ def draw_player_stats(output_video_frames, player_stats):
         output_video_frames[index] = cv2.putText(output_video_frames[index], text, (start_x + 130, start_y + 200), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
     
     return output_video_frames
+

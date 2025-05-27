@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
 import sys
+# print(sys.path) 
 sys.path.append('../')
-import constants
-from utilities import (
+from tennis_analysis import constants
+from tennis_analysis.utilities import (
     convert_meters_to_pixel_distance,
     convert_pixel_distance_to_meters,
     get_foot_position,
@@ -194,6 +195,7 @@ class MiniCourt():
             2: constants.PLAYER_2_HEIGHT_METERS
         }
 
+        
         output_player_boxes = []
         output_ball_boxes = []
 
@@ -204,6 +206,7 @@ class MiniCourt():
             closest_player_id_to_ball = min(player_bbox.keys(), key=lambda x: measure_distance(ball_position, get_centre_of_bbox(player_bbox[x])))
  
             output_player_bboxes_dict = {}
+            print(player_bbox.items())
             for player_id, bbox in player_bbox.items():
                 foot_position = get_foot_position(bbox)
 
@@ -222,7 +225,8 @@ class MiniCourt():
                                                                             closest_key_point, 
                                                                             closest_key_point_index, 
                                                                             max_player_height_in_pixels,
-                                                                            player_heights[player_id]
+                                                                            # player_heights[player_id]
+                                                                            player_heights[1]
                                                                             )
                 
                 output_player_bboxes_dict[player_id] = mini_court_player_position
@@ -237,7 +241,8 @@ class MiniCourt():
                                                                             closest_key_point, 
                                                                             closest_key_point_index, 
                                                                             max_player_height_in_pixels,
-                                                                            player_heights[player_id]
+                                                                            # player_heights[player_id],
+                                                                            player_heights[1]
                                                                             )
                     output_ball_boxes.append({1:mini_court_player_position})
             output_player_boxes.append(output_player_bboxes_dict)
